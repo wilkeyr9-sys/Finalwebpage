@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ballroom Practice Planner</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+            background: linear-gradient(135deg, #1e1e2f, #2c2c44);
+            color: #ffffff;
+            margin: 0;
+            padding: 0;
+        }
+
+        .app-container {
+            max-width: 800px;
+            margin: 60px auto;
+            background-color: #ffffff;
+            color: #333;
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        p.subtitle {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #555;
+        }
+
+        label {
+            font-weight: bold;
+            display: block;
+            margin-top: 20px;
+        }
+
+        select, input {
+            width: 100%;
+            padding: 10px;
+            margin-top: 6px;
+            font-size: 16px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            margin-top: 30px;
+            width: 100%;
+            padding: 14px;
+            font-size: 18px;
+            border: none;
+            border-radius: 10px;
+            background-color: #6a5acd;
+            color: white;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #5849b8;
+        }
+
+        .plan {
+            margin-top: 40px;
+            background-color: #f4f4f8;
+            padding: 25px;
+            border-radius: 12px;
+            display: none;
+        }
+
+        .plan h2 {
+            margin-top: 0;
+        }
+
+        ul {
+            margin-top: 10px;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            font-size: 14px;
+            color: #aaa;
+        }
+    </style>
+</head>
+<body>
+
+<div class="app-container">
+    <h1>Ballroom Practice Planner</h1>
+    <p class="subtitle">Create a focused, efficient practice session in seconds</p>
+
+    <label for="dance">Dance Style</label>
+    <select id="dance">
+        <option>Waltz</option>
+        <option>Tango</option>
+        <option>Foxtrot</option>
+        <option>Viennese Waltz</option>
+        <option>Cha-Cha</option>
+        <option>Rumba</option>
+        <option>Swing</option>
+        <option>Latin Technique</option>
+    </select>
+
+    <label for="duration">Practice Time (minutes)</label>
+    <input type="number" id="duration" value="60" min="20" max="180">
+
+    <label for="focus">Primary Focus</label>
+    <select id="focus">
+        <option>Technique</option>
+        <option>Musicality</option>
+        <option>Performance Quality</option>
+        <option>Stamina & Conditioning</option>
+    </select>
+
+    <button onclick="generatePlan()">Generate Practice Plan</button>
+
+    <div class="plan" id="plan">
+        <h2>Your Practice Plan</h2>
+        <ul id="planList"></ul>
+    </div>
+
+    <footer>
+        Built for IS 201 • HTML, CSS & JavaScript
+    </footer>
+    <a href="scratch.html" class="back-link">← Back to Scratch Page</a>
+
+</div>
+
+<script>
+function generatePlan() {
+    const dance = document.getElementById("dance").value;
+    const duration = parseInt(document.getElementById("duration").value);
+    const focus = document.getElementById("focus").value;
+
+    const planList = document.getElementById("planList");
+    planList.innerHTML = "";
+
+    const warmup = Math.round(duration * 0.2);
+    const main = Math.round(duration * 0.6);
+    const cooldown = duration - warmup - main;
+
+    const steps = [
+        `Warm-up (${warmup} min): Light movement, posture checks, basic figures`,
+        `Main Session (${main} min): ${dance} focused on ${focus.toLowerCase()}`,
+        `Drills: Technique repetition, timing accuracy, footwork precision`,
+        `Performance Run: Full routine with expression and intention`,
+        `Cool Down (${cooldown} min): Stretching and reflection`
+    ];
+
+    steps.forEach(step => {
+        const li = document.createElement("li");
+        li.textContent = step;
+        planList.appendChild(li);
+    });
+
+    document.getElementById("plan").style.display = "block";
+}
+</script>
+
+
+</body>
+</html>
